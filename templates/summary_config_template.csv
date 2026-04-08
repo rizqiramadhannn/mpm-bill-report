@@ -1,0 +1,4 @@
+metric_key,title,spreadsheet,sheet_name,column,operation,match_value
+total_orders,Total Orders,A,Orders,Order ID,count_non_empty,
+completed_orders,Completed Orders,A,Orders,Status,count_equals,Completed
+total_revenue,Total Revenue,A,Orders,Amount,sum,
