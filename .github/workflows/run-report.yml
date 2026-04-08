@@ -1,0 +1,14 @@
+name: Run MPM Report
+
+on:
+  schedule:
+    - cron: "48 14 * * *"
+  workflow_dispatch:
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel generate endpoint
+        run: |
+          curl -f -L "${{ secrets.REPORT_API_URL }}/api/generate" -o /tmp/report.pdf
