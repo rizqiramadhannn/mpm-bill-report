@@ -5,6 +5,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 
+from src.mpm_summary.email_sender import send_report_email
 from src.mpm_summary.pipeline import run_pipeline
 
 app = FastAPI()
@@ -21,6 +22,7 @@ def generate_pdf() -> FileResponse:
         temp_dir = Path(tempfile.gettempdir())
         os.environ["OUTPUT_DIR"] = str(temp_dir)
         generated_paths = run_pipeline()
+        send_report_email(generated_paths)
         output_path = Path(generated_paths[0])
         return FileResponse(
             path=str(output_path),
